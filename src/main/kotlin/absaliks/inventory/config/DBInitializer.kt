@@ -38,7 +38,7 @@ class DBInitializer(
                 "Apple iPhone 8",
                 "Apple iPhone 4s",
                 "Nokia 3310",
-            ).map { Phone(null, it, null, null) }
+            ).map { Phone(null, it, null, null, null) }
         )
 
         initSchema.then()

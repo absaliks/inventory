@@ -17,6 +17,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<kotlin.version>1.4.10</kotlin.version>
+		<mockserver-netty.version>5.11.2</mockserver-netty.version>
 	</properties>
 
 	<dependencies>
@@ -69,6 +70,19 @@
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+
+		<!-- FonoAPI is down (https://fonoapi.freshpixl.com/) using mock instead -->
+		<dependency>
+			<groupId>org.mock-server</groupId>
+			<artifactId>mockserver-netty</artifactId>
+			<version>${mockserver-netty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mock-server</groupId>
+			<artifactId>mockserver-client-java</artifactId>
+			<version>${mockserver-netty.version}</version>
 		</dependency>
 	</dependencies>
 

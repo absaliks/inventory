@@ -1,5 +1,6 @@
 package absaliks.inventory
 
+import absaliks.inventory.phonespec.PhoneSpecService
 import com.fasterxml.jackson.databind.JsonNode
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
@@ -7,9 +8,16 @@ import reactor.kotlin.core.publisher.switchIfEmpty
 import java.time.Instant
 
 @Service
-class JournalService(private val repository: InventoryRepository) {
+class JournalService(
+    private val repository: InventoryRepository,
+    private val phoneSpecService: PhoneSpecService
+) {
 
     fun getInventory() = repository.findAll()
+        .flatMap {
+            phone -> phoneSpecService.fetchPhoneSpecs(phone.phoneName)
+                .map { spec -> phone.copy(phoneSpecs = spec) }
+        }
 
     fun patch(id: Long, patch: JsonNode): Mono<Phone> {
         val userNode = patch.get("user")
